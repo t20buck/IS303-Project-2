@@ -54,19 +54,18 @@ def introduction():
     name = input("Before we begin, what is your name? ").strip().upper()
     print(f"\nWelcome, {name}! Let's build your season.\n")
     return name
-#2 
+#2
 def menu():
     # Displays the menu 
-    # returns the choice
-    print("\n--- MAIN MENU ---")
-    print("1. Play a Season")
-    print("2. Customize the team list")
-    print("3. Quit")
     while Alive:
-        choice = input("Enter your choice: ").strip()
+    # returns the choice
+        choice = input("\n--- MAIN MENU --" \
+        "\n1. Play a Season | 2. Customize the team list | 3. Quit" \
+        "\nEnter your choice: ").strip()
         if choice in ("1","2","3"):
             return choice
-        print("Invalid choice. Please enter a number option.")
+        else:
+            print("Invalid choice. Please enter a number option.")
 
 def adjust_team_list():
     # Adjust the team list
