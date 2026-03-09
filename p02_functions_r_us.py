@@ -70,17 +70,27 @@ def menu():
 def get_team_name():
     while True:
         # Prompts user for their team
-        print(default_teams)
+        print("\nCurrent team list:")
+        for team in default_teams:
+            print(f"{team}")
         home_team = input("Enter the name of your home team: ")
         if home_team not in default_teams:
             print("Invalid team. Please choose a from the list.")
         else:
             return home_team
 
-def get_opponent_team(game_number):
-    # Prompts user for opponents
-    opponent = input(f"Enter the name of the away team for game {game_number}: ")
-    return opponent
+def get_opponent_team(game_number, home_team):
+    while True:
+        # Prompts user for opponents
+        print("\nCurrent team list:")
+        for team in default_teams:
+            if team != home_team:
+                print(f"{team}")
+        opponent = input(f"Enter the name of the away team for game {game_number}: ")
+        if opponent not in default_teams or opponent == home_team:
+            print("Invalid team. Please choose a from the list.")
+        else:
+            return opponent
 
 def play_game(home_team, opponent):
     # Simulates a single soccer game between two teams.
@@ -103,17 +113,13 @@ def display_record(home_team, home_team_record):
     wins = len(home_team_record["Won Against"])
     losses = len(home_team_record["Lost Against"])
     total = wins + losses
-
     print("Teams won against:")
     for team in home_team_record["Won Against"]:
         print(f"  {team}")
-
     print("Teams lost against:")
     for team in home_team_record["Lost Against"]:
         print(f"  {team}")
-
     print(f"Final season record for {home_team}: {wins} - {losses}")
-
     win_percentage = (wins / total) * 100
     if win_percentage >= 75:
         print("Qualified for the NCAA Soccer Tournament!")
@@ -132,7 +138,7 @@ def play_season():
     home_team_record = {"Won Against": [], "Lost Against": []}
     # Simulate each game
     for game_number in range(1, number_of_games + 1):
-        opponent = get_opponent_team(game_number)
+        opponent = get_opponent_team(game_number, home_team)
         result = play_game(home_team,opponent)
         if result == "W":
             home_team_record["Won Against"].append(opponent)
@@ -173,11 +179,9 @@ def adjust_team_list():
         else:
             print("Invalid choice. Please enter a number option.")
 
-
 def main():
     # Get user name and display intro
     user_name = introduction()
-
     while Gospel:
         # Display menu and get choice
         choice = menu()
@@ -185,7 +189,7 @@ def main():
             play_season()
         elif choice == "2":
             adjust_team_list()
-        elif choice == "3":
+        else:
             print(f"\nThanks for playing, {user_name}! See you next season!")
             break
 
