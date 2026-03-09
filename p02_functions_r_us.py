@@ -1,7 +1,7 @@
 """This program simulates the results of soccer games for a specified home team.
 It prompts the user for the home team name and the number of games to simulate,
 then generates random scores for each game and displays the results.
-Author: Kyle Pinkney, Tye Buckley, """
+Author: Kyle Pinkney, Tye Buckley, Tanner Miskin"""
 
 import random
 
